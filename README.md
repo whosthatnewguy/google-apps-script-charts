@@ -1,6 +1,6 @@
 # COVID Google Chart gallery made with Google Apps Script, Google Sheets, and The COVID Tracking Project Data API
 ## Overview
-A gallery of ![three Google Charts](https://script.google.com/macros/s/AKfycbwUZVCfjw1wHBMBaZm9E6VUGgih1PSxyYWOPKgAbAU-mxCmvlgTxwKmxlEp5BlT6SM/exec) developed using Javascript, HTML, CSS, and MDB 5 Bootstrap components.
+A gallery of [three Google Charts](https://script.google.com/macros/s/AKfycbwUZVCfjw1wHBMBaZm9E6VUGgih1PSxyYWOPKgAbAU-mxCmvlgTxwKmxlEp5BlT6SM/exec) developed using Javascript, HTML, CSS, and MDB 5 Bootstrap components.
 
 This README file contains information on setting up the API endpoint and rendering each chart using Google Sheets as a backend.
 
@@ -37,7 +37,7 @@ function returnData() {
 }
 ```
 ## Load chart libraries, loader, Maps API key, and register callback
-In order to draw the `geochart`, a Google Maps API key is necessary. You can create a Google Cloud Platform project and generate an API key ![here](https://developers.google.com/maps/gmp-get-started). In the HTML of the webpage below, we load each chart package and register a callback function to execute when the charts finish loading:
+In order to draw the `geochart`, a Google Maps API key is necessary. You can create a Google Cloud Platform project and generate an API key [here](https://developers.google.com/maps/gmp-get-started). In the HTML of the webpage below, we load each chart package and register a callback function to execute when the charts finish loading:
 ```javascript
 <!DOCTYPE html>
 <html>
@@ -88,11 +88,11 @@ This process is repeated ad nauseam for each chart until your eyes bleed. Then, 
 </html>
 ```
 ## References 
-![The Covid Tracking Project](https://covidtracking.com/data/api)
+[The Covid Tracking Project](https://covidtracking.com/data/api)
 
-![Google Charts](https://developers.google.com/chart)
+[Google Charts](https://developers.google.com/chart)
 
-![Google Maps Platform](https://developers.google.com/maps/gmp-get-started)
+[Google Maps Platform](https://developers.google.com/maps/gmp-get-started)
 
 ## Author
 [jopringle](https://github.com/whosthatnewguy)
