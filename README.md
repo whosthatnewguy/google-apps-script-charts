@@ -1,6 +1,7 @@
 # Google Chart gallery made with Google Apps Script, Google Sheets, and The COVID Tracking Project Data API
 ## Overview
-A gallery of three Google Charts developed using Javascript, HTML, CSS, and MDB 5 Bootstrap components: https://script.google.com/macros/s/AKfycbwDXRbv1xvvHKcquUm-0PmDwBLDuIVZp0oqmO609YPbiQcLtLY/exec
+A gallery of three Google Charts developed using Javascript, HTML, CSS, and MDB 5 Bootstrap components:
+https://script.google.com/macros/s/AKfycbyQUkyqmLP26n293BC6kjJuQJMc6ig8BVaxaP-h_zRHWQDyBAxaTA_hFB4F4nqN443U/exec
 
 This README file contains information on setting up the API endpoint and rendering each chart using Google Sheets as a backend.
 
