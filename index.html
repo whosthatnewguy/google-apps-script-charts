@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  <!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet"/>
+		<!--Load the AJAX API-->
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {
+        'packages':['geochart','calendar','line'],
+        mapsApiKey:'YOUR_API_KEY_HERE'
+      });
+
+      // callback to run when the API is loaded
+      google.charts.setOnLoadCallback(getData);
+      google.charts.setOnLoadCallback(getData2);
+      google.charts.setOnLoadCallback(getData3);
+
+      // callback to code.gs script to create and populate data table
+      function getData3() {
+        google.script.run.withSuccessHandler(lineChart).returnData3();
+      }
+      function getData2() {
+        google.script.run.withSuccessHandler(drawCalendar).returnData2();
+      }
+      function getData() {
+        google.script.run.withSuccessHandler(drawSeriesChart).returnData();
+      }
+
+      // function for linechart
+      function lineChart(returnData3) {
+        const data = new google.visualization.arrayToDataTable(returnData3);
+        const options = {
+          chart: {
+            title: 'COVID Positive Cases & Deaths Per Day',
+            },
+            hAxis: {
+              scaleType: 'log',
+            },
+            width: 1200,
+            height: 600,
+            animation: {
+              startup: true,
+              duration: 20000,
+              easing: 'in'
+              }
+            }
+        const chart3 = new google.charts.Line(document.getElementById('chart_div3'));
+        chart3.draw(data,google.charts.Line.convertOptions(options));
+      };
+
+      // function for calendar chart
+      function drawCalendar(returnData2) {
+        // table from backend data
+        const data2 = new google.visualization.arrayToDataTable(returnData2);
+        // initialize chart
+        const options2 = {
+          title: 'COVID Deaths Per Month',
+          height: 350,
+          calendar: {
+            cellSize: 10,
+            focusedCellColor: {
+              stroke: '#d3362d',
+              strokeOpacity: 1,
+              strokeWidth: 1,
+              }
+          },
+              noDataPattern: {
+                backgroundColor: '#FFFFFF',
+                color: '#FFFFFF'
+                }
+              }
+
+        // initialize and draw
+        const chart2 = new google.visualization.Calendar(document.getElementById('chart_div2'));
+        chart2.draw(data2, options2);
+      }
+  
+      // function to draw geochart
+      function drawSeriesChart(returnData) {
+        const data = google.visualization.arrayToDataTable(returnData);
+        // chart settings    
+        var options = {
+          displayMode: 'regions',
+          region: 'US',
+          resolution: 'provinces',
+          colorAxis: {colors: ['#95bddc','#c43d16']}
+          // displayMode: 'markers',
+          // sizeAxis: { minValue: 0 , maxValue: 60000 }
+          }
+          // initialize and draw
+        const chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+       
+        // dashboard.draw(data);
+        // dashboard.bind(donutSlider, chart);
+      }
+    </script>
+	</head>
+	<body>
+   
+		<div id="dashboard_div">
+			<!-- <div id="chart_div"></div> -->
+  <main class="my-5">
+    <div class="container">
+      <!--Section: Content-->
+      <section class="text-center">
+        <h4 class="mb-5"><strong>Google Charts Gallery</strong></h4>
+
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="card" style="width:40rem">
+              <div class="card-header"> <h5>GeoChart</h5></div>
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                
+                <a href="#!">
+                  <div class="card-body">
+                  <div id="chart_div" style="width: 500px; height: 500px;"></div> 
+                  </div>
+                  <!-- <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div> -->
+                </a>
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <a href="https://developers.google.com/chart/interactive/docs/gallery/geochart" target="_blank">Visualization: GeoChart</a>
+                </p>
+                <button type="button" class="btn btn-outline-primary" data-mdb-toggle="popover" title="GeoChart Function" data-mdb-content="function drawSeriesChart(returnData) {
+        const data = google.visualization.arrayToDataTable(returnData);
+        const donutSlider = new google.visualization.ControlWrapper({
+          controlType: 'NumberRangeFilter',
+          containerId: 'filter_div',
+          options: {
+            filterColumnLabel: 'Date', 
+            width: 300,
+            height: 300,
+            pieSliceText: 'value',
+            legend: 'right'
+            }
+            }); 
+        var options = {
+          displayMode: 'regions',
+          region: 'US',
+          resolution: 'provinces',
+          colorAxis: {colors: ['#e7d143','#d96d79']}
+          }
+        const chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+                }
+                ">View Source Code</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="card" style="width:40rem">
+               <div class="card-header"><h5> Calendar Chart</h5></div>
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <div class="card-body">
+                  <div></div>
+                  <div></div>
+                <div id="chart_div2" class="text-center" style="width: 900px; height:500px;"></div>
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <a href="https://developers.google.com/chart/interactive/docs/gallery/calendar" target="_blank">Visualization: Calendar Chart</a>
+                </p>
+                <button type="button" class="btn btn-outline-primary" data-mdb-toggle="popover" title="Calendar Chart Function" data-mdb-content="   function drawCalendar(returnData2) {
+        const data2 = new google.visualization.arrayToDataTable(returnData2);
+        const options2 = {
+          title: 'Covid Deaths Per Day',
+          height: 350,
+          calendar: {
+            cellSize: 10,
+            focusedCellColor: {
+              stroke: '#d3362d',
+              strokeOpacity: 1,
+              strokeWidth: 1,
+              }
+          },
+              noDataPattern: {
+                backgroundColor: '#FFFFFF',
+                color: '#FFFFFF'
+                }
+              }
+        const chart2 = new google.visualization.Calendar(document.getElementById('chart_div2'));
+        chart2.draw(data2, options2);
+      }
+                ">View Source Code</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       <div class="row d-flex justify-content-center">
+          <div class="">
+            <div class="card" style="width:80rem">
+              <div class="card-header"> <h5>Line Chart</h5></div>
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <div class="card-body">
+                <div id="chart_div3" style=""></div> 
+                </div>
+                <a href="#!">
+                </a>
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <a href="https://developers.google.com/chart/interactive/docs/gallery/linechart" target="_blank">Visualization: Line Chart</a>
+                </p>
+                <button type="button" class="btn btn-outline-primary" data-mdb-toggle="popover" title="Line Chart Function" data-mdb-content="
+                function lineChart(returnData3) {
+        const data = new google.visualization.arrayToDataTable(returnData3);
+        const options = {
+          chart: {
+            title: 'Positive Cases & Deaths Per Day',
+            },
+            hAxis: {
+              scaleType: 'log',
+            },
+            width: 1200,
+            height: 600,
+            animation: {
+              startup: true,
+              duration: 20000,
+              easing: 'in'
+            }
+            }
+        const chart3 = new google.charts.Line(document.getElementById('chart_div3'));
+        chart3.draw(data,google.charts.Line.convertOptions(options));
+      }">View Source Code</button>
+              </div>
+            </div>
+          </div>
+          
+
+      </section>
+      <!--Section: Content-->
+    </div>
+  </main>
+  <!--Main layout-->
+    <!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"
+></script>
+	</body>
+</html>
