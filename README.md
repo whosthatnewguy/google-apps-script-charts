@@ -20,7 +20,7 @@ function getJSON() {
 Then, map JSON object to new array and write data to Google Sheets:
 ```javascript
   const result = responseJSON.map(r => [r.state, r.death, r.positive, r.date]);
-  dataRange = s.getRange(2,1,halfData.length,4).setValues(result)
+  dataRange = s.getRange(2,1,result.length,4).setValues(result)
 }
 ```
 ## Return data from backend
