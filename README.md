@@ -88,6 +88,13 @@ This process is repeated ad nauseam for each chart until your eyes bleed. Then, 
   </body>
 </html>
 ```
+## Build HTML template
+Lastly, in the `app.gs` file, we create a `doGet` function to generate an `HtmlTemplate` object, then call the `evaluate()` method to convert `index.html` file into an `HtmlOutput` object:
+```javascript
+function doGet() {
+  return HtmlService.createTemplateFromFile("index").evaluate();
+}
+```
 ## References 
 [The Covid Tracking Project](https://covidtracking.com/data/api)
 
